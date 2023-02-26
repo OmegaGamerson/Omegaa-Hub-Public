@@ -1,0 +1,331 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Omegaa Hub - Arsenal | Public Version",
+    LoadingTitle = "Omegaa Hub | An Arsenal UI",
+    LoadingSubtitle = "by Omegaa",
+    ConfigurationSaving = {
+       Enabled = true,
+       FolderName = nil, -- Create a custom folder for your hub/game
+       FileName = "Omegaa Hub"
+    },
+    Discord = {
+       Enabled = false,
+       Invite = "https://discord.gg/kEEjxHts", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD.
+       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+    KeySystem = true, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "Omegaa Hub",
+       Subtitle = "Key System",
+       Note = "Join the discord (https://discord.gg/kEEjxHts)",
+       FileName = "OmegaaKey",
+       SaveKey = true,
+       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = "OmegaaKey13gh3444vjdsa"
+    }
+ })
+--Introduction
+local Tab = Window:CreateTab("Information ( ! )") -- Title, Image
+
+local Section = Tab:CreateSection("Information & Credits")
+
+local Section = Tab:CreateSection("Script Version: 1.0")
+
+local Section = Tab:CreateSection("Script Developed by: Omegaa, omegaa#5814")
+
+local Section = Tab:CreateSection("Discord")
+
+local Button = Tab:CreateButton({
+   Name = "Join Discord Server (NOT WORKING)",
+   Callback = function() 
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Section = Tab:CreateSection("THANKS FOR USING THIS SCRIPT!")
+--Main
+ local Tab = Window:CreateTab("Main") -- Title, Image
+
+ local Section = Tab:CreateSection("MAIN")
+
+ local Toggle = Tab:CreateToggle({
+   Name = "Hard Lock",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Soft Lock (mainly for 1v1's)",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Silent Aim",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "FOV Circle",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   end,
+})
+
+local Slider = Tab:CreateSlider({
+   Name = "FOV Circle Size",
+   Range = {5, 100},
+   Increment = 1,
+   Suffix = "FOV SIZE",
+   CurrentValue = 25,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+
+local Dropdown = Tab:CreateDropdown({
+    Name = "HITPART",
+    Options = {"Head","HumanoidRootPart"},
+    CurrentOption = "Head",
+    Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Option)
+    -- The function that takes place when the selected option is changed
+    -- The variable (Option) is a string for the value that the dropdown was changed to
+    end,
+ })
+--Visuals
+local Tab = Window:CreateTab("Visuals") -- Title, Image
+
+local Section = Tab:CreateSection("ESP (Extra Sensory Perception)")
+
+local Toggle = Tab:CreateToggle({
+   Name = "Esp Box",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       
+   end,
+})
+
+local ColorPicker = Tab:CreateColorPicker({
+   Name = "Color Of ESP",
+   Color = Color3.fromRGB(255,255,255),
+   Flag = "ColorPicker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+       -- The function that takes place every time the color picker is moved/changed
+       -- The variable (Value) is a Color3fromRGB value based on which color is selected
+   end
+})
+
+local Button = Tab:CreateButton({
+   Name = "LOADS BOX ESP",
+   Callback = function()
+      ---Created By 0x83
+
+      local lplr = game.Players.LocalPlayer
+      local camera = game:GetService("Workspace").CurrentCamera
+      local CurrentCamera = workspace.CurrentCamera
+      local worldToViewportPoint = CurrentCamera.worldToViewportPoint
+      
+      local HeadOff = Vector3.new(0, 0.5, 0)
+      local LegOff = Vector3.new(0,3,0)
+      
+      for i,v in pairs(game.Players:GetChildren()) do
+          local BoxOutline = Drawing.new("Square")
+          BoxOutline.Visible = false
+          BoxOutline.Color = Color3.new(0,0,0)
+          BoxOutline.Thickness = 3
+          BoxOutline.Transparency = 1
+          BoxOutline.Filled = false
+      
+          local Box = Drawing.new("Square")
+          Box.Visible = false
+          Box.Color = Color3.new(1,1,1)
+          Box.Thickness = 1
+          Box.Transparency = 1
+          Box.Filled = false
+      
+          function boxesp()
+              game:GetService("RunService").RenderStepped:Connect(function()
+                  if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lplr and v.Character.Humanoid.Health > 0 then
+                      local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+      
+                      local RootPart = v.Character.HumanoidRootPart
+                      local Head = v.Character.Head
+                      local RootPosition, RootVis = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                      local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
+                      local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+      
+                      if onScreen then
+                          BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                          BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+                          BoxOutline.Visible = true
+      
+                          Box.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                          Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+                          Box.Visible = true
+      
+                          if v.TeamColor == lplr.TeamColor then
+                              BoxOutline.Visible = false
+                              Box.Visible = false
+                          else
+                              BoxOutline.Visible = true
+                              Box.Visible = true
+                          end
+      
+                      else
+                          BoxOutline.Visible = false
+                          Box.Visible = false
+                      end
+                  else
+                      BoxOutline.Visible = false
+                      Box.Visible = false
+                  end
+              end)
+          end
+          coroutine.wrap(boxesp)()
+      end
+      
+      game.Players.PlayerAdded:Connect(function(v)
+          local BoxOutline = Drawing.new("Square")
+          BoxOutline.Visible = false
+          BoxOutline.Color = Color3.new(0,0,0)
+          BoxOutline.Thickness = 3
+          BoxOutline.Transparency = 1
+          BoxOutline.Filled = false
+      
+          local Box = Drawing.new("Square")
+          Box.Visible = false
+          Box.Color = Color3.new(1,1,1)
+          Box.Thickness = 1
+          Box.Transparency = 1
+          Box.Filled = false
+      
+          function boxesp()
+              game:GetService("RunService").RenderStepped:Connect(function()
+                  if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lplr and v.Character.Humanoid.Health > 0 then
+                      local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+      
+                      local RootPart = v.Character.HumanoidRootPart
+                      local Head = v.Character.Head
+                      local RootPosition, RootVis = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                      local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
+                      local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+      
+                      if onScreen then
+                          BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                          BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+                          BoxOutline.Visible = true
+      
+                          Box.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                          Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+                          Box.Visible = true
+      
+                          if v.TeamColor == lplr.TeamColor then
+                              BoxOutline.Visible = false
+                              Box.Visible = false
+                          else
+                              BoxOutline.Visible = true
+                              Box.Visible = true
+                          end
+      
+                      else
+                          BoxOutline.Visible = false
+                          Box.Visible = false
+                      end
+                  else
+                      BoxOutline.Visible = false
+                      Box.Visible = false
+                  end
+              end)
+          end
+          coroutine.wrap(boxesp)()
+      end)
+      
+      ---Created By 0x83
+   end,
+})
+-- Hitbox Expander
+local Tab = Window:CreateTab("HBE") -- Title, Image
+
+local Section = Tab:CreateSection("HBE (HitBox Expander)")
+
+local Button = Tab:CreateButton({
+   Name = "HitBox Expander",
+   Callback = function()
+      function getplrsname()
+         for i,v in pairs(game:GetChildren()) do
+         if v.ClassName == "Players" then
+         return v.Name
+         end
+         end
+         end
+         local players = getplrsname()
+         local plr = game[players].LocalPlayer
+         coroutine.resume(coroutine.create(function()
+         while  wait(1) do
+         coroutine.resume(coroutine.create(function()
+         for _,v in pairs(game[players]:GetPlayers()) do
+         if v.Name ~= plr.Name and v.Character then
+         v.Character.RightUpperLeg.CanCollide = false
+         v.Character.RightUpperLeg.Transparency = 10
+         v.Character.RightUpperLeg.Size = Vector3.new(13,13,13)
+         
+         v.Character.LeftUpperLeg.CanCollide = false
+         v.Character.LeftUpperLeg.Transparency = 10
+         v.Character.LeftUpperLeg.Size = Vector3.new(13,13,13)
+         
+         v.Character.HeadHB.CanCollide = false
+         v.Character.HeadHB.Transparency = 10
+         v.Character.HeadHB.Size = Vector3.new(13,13,13)
+         
+         v.Character.HumanoidRootPart.CanCollide = false
+         v.Character.HumanoidRootPart.Transparency = 10
+         v.Character.HumanoidRootPart.Size = Vector3.new(13,13,13)
+         
+         end
+         end
+         end))
+         end
+         end))
+   end,
+})
+
+local Slider = Tab:CreateSlider({
+   Name = "HitBox Expander Size",
+   Range = {5,75},
+   Increment = 1,
+   Suffix = "HITBOX SIZE",
+   CurrentValue = 10,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+--Misc
+local Tab = Window:CreateTab("Misc") -- Title, Image
+
+
+--Gun Mods
+local Tab = Window:CreateTab("Gun Mods") -- Title, Image
+
