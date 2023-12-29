@@ -6,26 +6,34 @@
     <title>OmegasGames</title>
 </head>
 <body>
-    <h1> Omega Technologies</h1>
+    <h1>Omega Technologies</h1>
     <h2>-- ABOUT OMEGA TECHNOLOGIES--</h2>
     <h1>At Omega Technologies, our team develops and encourages our small community to promote the exploitation of game and software engineering usage.</h1>
 
-    <h2> Your Information:</h2>
+    <h2>Your Information:</h2>
     <p id="info">Loading...</p>
 
     <script>
-        // Placeholder IP information
-        const ipAddress = "192.168.1.1"; // Replace with any IP address for demonstration
-        // Normally, you'd use a service or database to get this info, but for simplicity, we'll just provide a static mapping.
-        const locationInfo = {
-            city: "SampleCity",
-            state: "SampleState",
-            country: "SampleCountry"
-        };
-
-        const infoElement = document.getElementById('info');
-        infoElement.textContent = `Your IP Address: ${ipAddress}\nCity: ${locationInfo.city}\nState: ${locationInfo.state}\nCountry: ${locationInfo.country}`;
+        // Check if geolocation is supported by the browser
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                
+                const infoElement = document.getElementById('info');
+                infoElement.textContent = `Latitude: ${latitude}\nLongitude: ${longitude}`;
+                
+                // You can also use this data to fetch more detailed location information using services like reverse geocoding.
+            }, function(error) {
+                // Handle errors, if any
+                console.error("Error occurred while retrieving location:", error);
+                const infoElement = document.getElementById('info');
+                infoElement.textContent = "Failed to retrieve location.";
+            });
+        } else {
+            const infoElement = document.getElementById('info');
+            infoElement.textContent = "Geolocation is not supported by this browser.";
+        }
     </script>
-
 </body>
 </html>
