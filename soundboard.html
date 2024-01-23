@@ -32,14 +32,12 @@
 <body>
   <h1>Soundboard</h1>
   <div>
-    <button class="sound-button" onclick="playSound('sound1.mp3')">Sound 1</button>
-    <button class="sound-button" onclick="playSound('sound2.mp3')">Sound 2</button>
-    <button class="sound-button" onclick="playSound('sounds_android-notif.mp3')">Sound 3</button>
+    <button class="sound-button" onclick="playSound('sounds_android-notif.mp3')">Play Sound</button>
   </div>
 
   <script>
     function playSound(soundFile) {
-      var audio = new Audio(sounds_android-notif.mp3);
+      var audio = new Audio(soundFile);
       audio.play();
     }
   </script>
